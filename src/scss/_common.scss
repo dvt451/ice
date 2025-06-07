@@ -1,0 +1,172 @@
+@use "./settings" as *;
+@use "./base/mixins" as *;
+
+.main-link {
+	// .hero-link__icon
+	display: inline-flex;
+	align-items: center;
+	gap: toRem(20);
+	transition: all 0.5s ease;
+	@media (any-hover: hover) {
+		&:hover {
+			.main-link {
+				&__icons {
+					&::before {
+						transform: translateY(0);
+					}
+					.main-link__icon {
+						color: #000;
+						svg {
+							fill: #000;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&__icons {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@media (min-width: $tablet) {
+			@include adaptiveValue("width", 166, 60, $containerWidth, 991.98);
+			@include adaptiveValue("height", 166, 60, $containerWidth, 991.98);
+		}
+		width: toRem(94);
+		height: toRem(94);
+		border-radius: 50%;
+		position: relative;
+		overflow: hidden;
+		&::before {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			border-radius: 50%;
+			background-color: #fff;
+			transform: translateY(calc(100% + toRem(1)));
+			transition: all 0.5s ease;
+		}
+		.circle {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			stroke: #fff;
+			&_1 {
+				animation: rotation-1 15s linear 0s infinite;
+			}
+			&_2 {
+				animation: rotation-2 7.5s linear 0s infinite;
+			}
+		}
+	}
+
+	&__icon {
+		position: relative;
+		z-index: 1;
+		svg {
+			transition: all 0.5s ease;
+		}
+		transition: all 0.5s ease;
+	}
+
+	// .hero-link__text
+
+	&__text {
+		text-transform: uppercase;
+		font-size: toRem(21);
+		font-family: "Cervo";
+		font-style: normal;
+	}
+}
+@keyframes rotation-1 {
+	from {
+		transform: rotate(375deg);
+	}
+	to {
+		transform: rotate(15deg);
+	}
+}
+@keyframes rotation-2 {
+	from {
+		transform: rotate(360deg);
+	}
+	to {
+		transform: rotate(0deg);
+	}
+}
+.style-menu {
+	font-family: "HelveticaNeueCyr";
+	color: var(--buttonTextColor);
+	position: relative;
+	transition: all 0.5s ease;
+
+	&__front {
+		width: 100%;
+		height: 100%;
+		position: relative;
+		padding: toRem(10);
+		z-index: 1;
+		background-color: var(--buttonSecondaryColor);
+		border: toRem(1) solid var(--buttonTextColor);
+		transition: all 0.5s ease;
+		overflow: hidden;
+		display: flex;
+
+		span {
+			z-index: 1;
+			transition: all 0.5s ease;
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			width: calc(100% + toRem(2));
+			height: 100%;
+			top: 0;
+			left: toRem(0);
+			background-color: var(--buttonTextColor);
+			z-index: 0;
+			transform-origin: bottom left;
+			transform: scaleY(0);
+			transition: all 0.5s ease;
+		}
+	}
+	&__back {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: toRem(3);
+		left: toRem(3);
+		background-color: var(--buttonTextColor);
+		z-index: 0;
+	}
+	&.hhv {
+		@media (any-hover: hover) {
+			&:hover {
+				.style-menu__front {
+					transform: translate3d(toRem(3), toRem(3), 0);
+					.icon-burger {
+						span,
+						&::before,
+						&::after {
+							background-color: var(--buttonSecondaryColor);
+						}
+					}
+					span {
+						color: var(--buttonSecondaryColor);
+					}
+					&::before {
+						content: "";
+						background-color: var(--buttonTextColor);
+						transform: scale(1);
+					}
+				}
+			}
+		}
+	}
+}

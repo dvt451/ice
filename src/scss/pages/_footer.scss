@@ -1,0 +1,141 @@
+//====================================================================================================
+@use "../settings" as *;
+@use "../base/mixins" as *;
+
+//====================================================================================================
+.footer {
+	background-color: var(--primary);
+
+	// .footer__container
+
+	&__container {
+		max-width: toRem(1500);
+		padding-bottom: toRem(30);
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	// .footer__title
+
+	&__title {
+		padding-top: toRem(30);
+		padding-inline: #{$containerPadding}px;
+		text-align: center;
+		font-size: toRem(90);
+		@include adaptiveValue("font-size", 90, 40);
+		font-family: "Cervo Medium";
+		color: #fff;
+	}
+
+	// .footer__form
+
+	&__form {
+		@include adaptiveValue("padding-top", 100, 10);
+	}
+	&__submit {
+		font-size: toRem(16);
+		.style-menu__front {
+			padding: toRem(20) toRem(30);
+		}
+	}
+	&__column {
+		display: flex;
+		width: 100%;
+		gap: toRem(30);
+		@media (max-width: $mobile) {
+			flex-direction: column;
+			gap: 0;
+		}
+	}
+	&__bottom {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		@include adaptiveValue("padding-top", 100, 30);
+		@media (max-width: $mobile) {
+			flex-direction: column;
+			align-items: start;
+			gap: toRem(30);
+		}
+		color: #fff;
+		font-family: "HelveticaNeueCyr";
+		font-size: toRem(16);
+		a {
+			@media (any-hover: hover) {
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+	&__media {
+		display: flex;
+		gap: toRem(20);
+	}
+}
+.input-item {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	font-size: toRem(18);
+	padding-top: toRem(15);
+	margin-bottom: toRem(20);
+	padding-bottom: toRem(4);
+	color: #fff;
+	font-family: "HelveticaNeueCyr";
+	width: 100%;
+	label {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		transition: all 0.3s ease;
+	}
+	input {
+		background-color: transparent;
+		border-bottom: toRem(1) solid #fff;
+		outline: none;
+		color: #fff;
+		padding: toRem(10) toRem(10) toRem(15) toRem(0);
+		font-family: "HelveticaNeueCyr";
+		position: relative;
+		line-height: normal;
+	}
+	span {
+		position: absolute;
+		width: 0%;
+		height: toRem(1);
+		bottom: 0;
+		left: 0;
+		background-color: #fff;
+		transition: all 0.5s ease;
+	}
+}
+.input-item input:focus ~ label,
+.input-item input:not(:placeholder-shown) ~ label {
+	font-size: toRem(14);
+}
+.input-item input:focus ~ span {
+	width: 100%;
+}
+//========================================================================================================================================================
+.footer {
+	width: 100%;
+	position: relative;
+	z-index: 1;
+
+	// height will be set dynamically via JS
+	&__stick {
+		width: 100%;
+		background: var(--primary);
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+	}
+}
+
+.footer-helper {
+	width: 100%;
+	// height will be set dynamically to match footer height
+}

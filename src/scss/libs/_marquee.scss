@@ -1,0 +1,54 @@
+@use "../settings" as *;
+@use "../base/mixins" as *;
+
+.marquee {
+	white-space: nowrap;
+	overflow: hidden;
+	font-family: "Cervo";
+	font-weight: 400;
+	position: relative;
+	.marquee__wrapper {
+		display: inline-flex;
+		white-space: nowrap;
+	}
+	&__item {
+		font-size: toRem(135);
+		color: transparent; /* Hide fill color */
+		-webkit-text-stroke: 1px var(--primary);
+		margin-right: toRem(30);
+		span {
+			&:nth-child(2) {
+				margin-left: toRem(30);
+				color: var(--primary);
+			}
+		}
+	}
+}
+
+.marquee_left {
+	.marquee__wrapper {
+		animation: runningRight 8s infinite 0s linear;
+	}
+}
+.marquee_right {
+	.marquee__wrapper {
+		animation: runningLeft 8s infinite 0s linear;
+	}
+}
+
+@keyframes runningLeft {
+	0% {
+		transform: translateX(0%);
+	}
+	100% {
+		transform: translateX(calc(-1 * var(--wrapper-width) - toRem(30)));
+	}
+}
+@keyframes runningRight {
+	0% {
+		transform: translateX(calc(-1 * var(--wrapper-width) - toRem(30)));
+	}
+	100% {
+		transform: translateX(0%);
+	}
+}

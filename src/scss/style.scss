@@ -1,0 +1,7 @@
+// 1. @use rules
+@forward "base/null"; // Import null.scss for reset (reset styles should be imported before styles)
+@forward "./base/basic";
+@forward "./common";
+@forward "pages/header"; // Header styles
+@forward "pages/footer"; // Footer styles
+@forward "pages/home"; // Home page styles
