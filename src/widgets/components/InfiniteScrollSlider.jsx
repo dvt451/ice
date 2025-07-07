@@ -8,16 +8,17 @@ export default function InfiniteScrollSlider({ images }) {
 	const screenWidth = window.innerWidth;
 	const isTablet = screenWidth <= 991.98;
 	const isMobileSmall = screenWidth <= 479.98;
+	const animationRef = useRef(null);
 
 	const multiplier = isMobileSmall ? 4 : isTablet ? 2 : 1;
 	let xPercent = 100 * multiplier;
 	let direction = -1;
-	const speed = 0.3 + (multiplier / 10);
+	const speed = 0.1 + (multiplier / 10);
 
 	useEffect(() => {
+		if (!sliderRef.current) return;
 		gsap.registerPlugin(ScrollTrigger);
-
-		gsap.to(sliderRef.current, {
+		const tween = gsap.to(sliderRef.current, {
 			scrollTrigger: {
 				trigger: sliderRef.current,
 				start: 'top bottom',
@@ -30,18 +31,26 @@ export default function InfiniteScrollSlider({ images }) {
 			x: `-=${1000 / multiplier}px`,
 		});
 
-		requestAnimationFrame(animate);
+
+		const animate = () => {
+			if (!sliderRef.current) return;
+			if (xPercent <= -100 * multiplier) xPercent = 0;
+			if (xPercent > 0) xPercent = -100 * multiplier;
+
+			gsap.set(sliderRef.current, { xPercent });
+			xPercent += speed * direction;
+
+			animationRef.current = requestAnimationFrame(animate);
+		};
+		animate();
+
+		return () => {
+			tween.kill();
+			ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+			cancelAnimationFrame(animationRef.current); // ❗ остановка при размонтировании
+		};
 	}, [multiplier]);
-
-	const animate = () => {
-		if (xPercent <= -100 * multiplier) xPercent = 0;
-		if (xPercent > 0) xPercent = -100 * multiplier;
-
-		gsap.set(sliderRef.current, { xPercent });
-		xPercent += speed * direction;
-
-		requestAnimationFrame(animate);
-	};
 
 	return (
 		<div ref={sliderRef} className="slider">
@@ -69,3 +78,5 @@ export default function InfiniteScrollSlider({ images }) {
 		</div>
 	);
 }
+
+

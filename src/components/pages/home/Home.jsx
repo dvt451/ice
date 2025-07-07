@@ -3,17 +3,19 @@ import React from 'react';
 import Header from '../../../widgets/header/Header';
 import MainContent from './MainContent';
 import Footer from '../../../widgets/footer/Footer';
+import Ordometer from '../../../features/Ordometer';
+import Transition from '../../../features/Transition';
 
-export default function Home() {
 
-
+const Home = () => {
 	return (
 		<>
-			<Header />
+			<Ordometer />
 			<main className="home">
 				<MainContent />
 			</main>
-			<Footer />
 		</>
 	);
 }
+
+export default Transition(Home);

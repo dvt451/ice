@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import Hero from './sections/Hero/Hero'
 import HomeAbout from './sections/HomeAbout'
 import HomeInfiniteScrollSlider from './sections/HomeInfiniteScrollSlider'
@@ -6,6 +6,9 @@ import HeroTitle from './sections/Hero/HeroTitle'
 import HeroContent from './sections/Hero/HeroContent'
 import ImageResize from '../../../widgets/components/ImageResize'
 import CatalogBlock from './sections/CatalogBlock'
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import gsap from 'gsap';
+import { MyContext } from '../../../shared/hooks/MyContextProvider'
 
 export default function MainContent() {
 	const iceCreams = [
@@ -66,6 +69,24 @@ export default function MainContent() {
 			id: 8,
 		}
 	]
+	const _ = useContext(MyContext)
+	const bottomBlock = useRef(null)
+	useEffect(() => {
+		const triggerBottom = ScrollTrigger.create({
+			trigger: bottomBlock.current,
+			start: '97% top',
+			end: 'bottom top',
+			onEnter: () => _.setDark(true),       // Scrolling down into section
+			onEnterBack: () => _.setDark(true),   // Scrolling up into section
+			onLeave: () => _.setDark(false),      // Scrolling down out of section
+			onLeaveBack: () => _.setDark(false),  // Scrolling up out of section
+		});
+
+		return () => {
+			triggerBottom.kill();
+		}
+	}, [])
+
 	return (
 		<>
 			<div className='home-top-block'>
@@ -83,7 +104,7 @@ export default function MainContent() {
 				<CatalogBlock products={iceCreams} />
 				<HomeInfiniteScrollSlider />
 			</div>
-			<div className="home-bottom-block">
+			<div ref={bottomBlock} className="home-bottom-block">
 				<ImageResize image={'/img/trailing.webp'} />
 			</div>
 			{/* <div style={{ position: 'relative', zIndex: '2', background: 'var(--colBackground)' }}><HomeCatalog /></div> */}

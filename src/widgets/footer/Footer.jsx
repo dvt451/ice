@@ -6,7 +6,6 @@ export default function Footer() {
 	const footerInnerRef = useRef(null);     // The inner content
 	const widthLimit = window.innerWidth > 359;
 	const heightLimit = window.innerHeight > 560;
-	console.log('Width: ' + widthLimit, 'Height: ' + heightLimit);
 
 	const conditionalStyle =
 		widthLimit && heightLimit
@@ -21,8 +20,9 @@ export default function Footer() {
 				footerInnerRef.current.style.height = `${height}px`;
 			}
 		};
-
-		updateFooterHeight();
+		setTimeout(() => {
+			updateFooterHeight();
+		}, 300);
 		window.addEventListener('resize', updateFooterHeight);
 
 		return () => {

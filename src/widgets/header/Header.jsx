@@ -1,15 +1,23 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import HeaderLogo from '../logos/HeaderLogo'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { MyContext } from '../../shared/hooks/MyContextProvider';
 
 export default function Header() {
 	const [isOpen, setIsOpen] = useState(false);
 	const burgerBodyRef = useRef(null);
-
+	const _ = useContext(MyContext);
 	const menuDisable = true;
 
 	const menuToggle = () => {
 		setIsOpen(!isOpen)
+	}
+
+	const linkClick = () => {
+		if (!menuDisable) {
+			setIsOpen(false)
+		}
+		_.setLoadingState(false)
 	}
 
 	const menu = [
@@ -70,7 +78,7 @@ export default function Header() {
 												}}
 												className="menu__item"
 											>
-												<Link to={item.path} className="menu__link">{item.name}</Link>
+												<NavLink to={item.path} onClick={linkClick} className="menu__link">{item.name}</NavLink>
 											</li>
 										);
 									})

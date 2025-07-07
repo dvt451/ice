@@ -17,14 +17,24 @@
 		fill: #fff;
 	}
 }
-.header-logo {
+.logo {
 	position: fixed;
 	// mix-blend-mode: difference;
 	top: toRem(0);
 	margin-top: toRem(30);
 	left: toRem(30);
 	z-index: 9;
+	color: var(--primary);
+	transition: all 0.3s ease;
 	&._active {
+		color: #fff;
+		.logo__col {
+			&::before {
+				background-color: #fff;
+			}
+		}
+		.col {
+		}
 		svg {
 			fill: #fff;
 		}
@@ -38,6 +48,30 @@
 		@media (max-width: $mobile) {
 			width: toRem(80);
 			height: toRem(20);
+		}
+	}
+	.logo__context {
+		display: flex;
+		align-items: center;
+		gap: toRem(5);
+		font-size: toRem(40);
+		font-family: "HelveticaNeueCyrBlack";
+	}
+	&__col {
+		&:nth-child(1) {
+			font-size: 0.6em;
+			position: relative;
+			transform: translate(0, toRem(-2));
+			&::before {
+				content: "";
+				position: absolute;
+				width: 100%;
+				height: toRem(2);
+				top: 100%;
+				left: 0;
+				background-color: var(--primary);
+				transition: all 0.3s ease;
+			}
 		}
 	}
 }
@@ -257,7 +291,7 @@
 		&__item {
 			overflow: hidden;
 			padding: toRem(2) toRem(0) toRem(2) toRem(20);
-			color: var(--colBackground);
+			color: #fff;
 			position: relative;
 			transition: all 0.3s ease;
 			&::before {

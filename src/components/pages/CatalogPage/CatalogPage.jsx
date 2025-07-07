@@ -2,8 +2,9 @@ import React from 'react'
 import Header from '../../../widgets/header/Header'
 import Footer from '../../../widgets/footer/Footer'
 import Catalog from '../../../widgets/components/Catalog'
+import Transition from '../../../features/Transition';
 
-export default function CatalogPage() {
+const CatalogPage = () => {
 	const iceCreams = [
 		{
 			title: 'Raspberry Mochi',
@@ -64,7 +65,6 @@ export default function CatalogPage() {
 	]
 	return (
 		<>
-			<Header />
 			<main className='cataloge-page'>
 				<div className='home__catalog home-catalog'>
 					<div className="home-catalog__container">
@@ -73,7 +73,7 @@ export default function CatalogPage() {
 					<Catalog products={iceCreams} />
 				</div>
 			</main>
-			<Footer />
 		</>
 	)
 }
+export default Transition(CatalogPage);

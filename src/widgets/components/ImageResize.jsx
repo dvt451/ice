@@ -1,15 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 
 import Marque from '../Marque'
-import HeroTitle from '../../components/pages/home/sections/Hero/HeroTitle';
-import HeroContent from '../../components/pages/home/sections/Hero/HeroContent';
+import { motion } from 'framer-motion';
+import { MyContext } from '../../shared/hooks/MyContextProvider';
 
 export default function ImageResize({ children, image }) {
 	const imageRef = useRef(null);
+	const pictureRef = useRef(null);
 	const sectionRef = useRef(null);
 	const isMobile = window.innerWidth <= 768;
+	const _ = useContext(MyContext)
 
 	useEffect(() => {
 		const img = imageRef.current;
@@ -64,11 +65,27 @@ export default function ImageResize({ children, image }) {
 			moveAnim.kill();
 		};
 	}, [isMobile]); // Add dependencies if needed
+	useEffect(() => {
+		if (!_.loadingState) return;
+		gsap.fromTo(
+			pictureRef.current,
+			{ scale: 1.4 },
+			{
+				scale: 1,
+				duration: 3,
+				delay: 3.6,
+				ease: 'power1.out', // аналог ease-out
+			}
+		);
+	}, [])
+
 	return (
 		<div ref={sectionRef} className='image-resize'>
 			<div className='sticky-container'>
 				<div className="image-resize__image-container">
-					<div ref={imageRef} className='image-resize__image-wrapper'><img src={image} alt="" /></div>
+					<div ref={imageRef} className='image-resize__image-wrapper'>
+						<img ref={pictureRef} src={image} alt={'wallpeper'} />;
+					</div>
 				</div>
 			</div>
 			<div className="image-resize__section">

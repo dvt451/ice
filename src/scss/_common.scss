@@ -82,6 +82,9 @@
 		font-size: toRem(21);
 		font-family: "Cervo";
 		font-style: normal;
+		.section-title {
+			gap: toRem(5);
+		}
 	}
 }
 @keyframes rotation-1 {
@@ -169,4 +172,42 @@
 			}
 		}
 	}
+}
+.section-title {
+	display: flex;
+	justify-content: center;
+	gap: toRem(20);
+	flex-wrap: wrap;
+	overflow: hidden;
+	transition: all 0.3s ease;
+	transform-origin: bottom left;
+	span {
+		display: inline-block;
+	}
+	&.word {
+		gap: toRem(0) !important;
+	}
+}
+.gsap-marker-end {
+	color: #000 !important;
+}
+.slide-in {
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: var(--primary);
+	// transform-origin: left;
+	z-index: 125;
+}
+.slide-out {
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: var(--primary);
+	// transform-origin: right;
+	z-index: 125;
 }

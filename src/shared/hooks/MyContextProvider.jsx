@@ -11,9 +11,12 @@ export { MyContext };
 export default function MyContextProvider({ children }) {
 	// Define the state or values you want to share
 	const [Dark, setDark] = useState(false);
+	const [loadingState, setLoadingState] = useState(true);
 	const _ = {
 		Dark,
-		setDark
+		setDark,
+		loadingState,
+		setLoadingState
 	}
 
 	// Return the provider with the value

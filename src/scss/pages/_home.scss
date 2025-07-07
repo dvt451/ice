@@ -78,8 +78,12 @@
 				}
 				color: $contextColor;
 			}
+			.section-title {
+				gap: toRem(1);
+			}
 		}
 	}
+
 	.hero-content {
 		padding-top: toRem(232);
 		padding-bottom: toRem(260);
@@ -123,6 +127,7 @@
 			}
 		}
 		&__title-line {
+			overflow: hidden;
 			@media (min-width: $tablet) {
 				&:nth-child(1) {
 					svg {
@@ -229,7 +234,7 @@
 		padding-bottom: toRem(100);
 	}
 
-	// .home-about__text
+	// .home-about__title
 
 	&__title {
 		font-size: toRem(171);
@@ -245,8 +250,7 @@
 		}
 		// .home-about__text_line
 
-		&_line {
-			text-align: center;
+		.section-title {
 			text-transform: uppercase;
 			font-family: "Cervo Medium";
 			line-height: em(144, 130);
@@ -326,6 +330,12 @@
 			// font-size: toRem(30);
 			padding-top: toRem(70);
 		}
+		.section-title {
+			line-height: 100%;
+			row-gap: 0;
+			@include adaptiveValue("column-gap", 20, 10);
+			justify-content: start;
+		}
 	}
 	&__texts {
 		font-family: "HelveticaNeueCyr";
@@ -338,6 +348,11 @@
 		@media (max-width: em(900)) {
 			margin-top: toRem(20);
 			font-size: toRem(14);
+		}
+		.section-title {
+			row-gap: 0;
+			column-gap: toRem(6);
+			justify-content: start;
 		}
 	}
 	&__link {
@@ -365,6 +380,16 @@
 		text-align: center;
 		color: var(--primary);
 		padding-block: toRem(50);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		@include adaptiveValue("gap", 50, 20);
+		@media (max-width: em(490)) {
+			flex-direction: column;
+		}
+		.section-title {
+			gap: toRem(0);
+		}
 	}
 	.catalog {
 		padding-top: toRem(50);
@@ -548,6 +573,11 @@
 		@media (max-width: $mobile) {
 			@include adaptiveValue("font-size", 40, 18, 767.98, 320);
 		}
+		.section-title {
+			gap: toRem(10);
+			row-gap: 0;
+			justify-content: start;
+		}
 	}
 
 	// .catalog__title
@@ -571,6 +601,7 @@
 	&__price {
 		font-size: em(26, 25);
 		color: var(--primary);
+		gap: toRem(2) !important;
 	}
 
 	// .catalog__button
@@ -767,6 +798,7 @@
 		width: toRem(300);
 		height: toRem(300);
 		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		overflow: hidden;
 		img {
 			position: absolute;
 			width: 100%;

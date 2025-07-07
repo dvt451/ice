@@ -3,6 +3,7 @@ import CircleLink from '../../../../widgets/links/CircleLink'
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
 import { MyContext } from '../../../../shared/hooks/MyContextProvider';
+import TitleComponent from '../../../../features/TitleAnimation/TitleComponent';
 
 export default function HomeAbout() {
 	const image1Ref = useRef();
@@ -111,10 +112,11 @@ export default function HomeAbout() {
 			</div>
 			<div className="home-about__container">
 				<h2 ref={titleRef} className="home-about__title">
-					<div className='home-about__title_line'>This is Mr. Pops.</div>
-					<div className='home-about__title_line'>He'll come in even to those</div>
-					<div className='home-about__title_line'>who are completely indifferent</div>
-					<div className='home-about__title_line'>to ice cream.</div>
+
+					<TitleComponent text={'This is Mr. Ice.'} />
+					<TitleComponent text={"He'll come in even to those"} />
+					<TitleComponent text={'who are completely indifferent'} />
+					<TitleComponent text={'to ice cream.'} />
 				</h2>
 				<div className="home-about__columns">
 
@@ -128,11 +130,16 @@ export default function HomeAbout() {
 							<img ref={image2Ref} src="/img/about_2.jpg" alt="picture" />
 						</div>
 						<h3 className="home-about-content__title">
-							Who has tried it, knows everything. Those who haven't - get ready for the dopamine thirst of "that very taste"
+							<TitleComponent text={`Who has tried it, knows everything. Those who haven't - get ready for the dopamine thirst of "that very taste"`} />
+
 						</h3>
 						<div className="home-about-content__texts">
-							<p className="home-about-content__text">Our goal is not ice cream. It would be quite simple. We need to make you "touched" when you, for example, bite into an Eskimo. It is difficult to do, but we do it.</p>
-							<p className="home-about-content__text">How? We do not tolerate simplifications: neither in tastes, nor in ingredients, nor in production. Pistachio, for example, we buy on a farm in the Bronte region, Sicily. We order Alfonso mango from India, and chocolate is brought to us directly from Belgium. Our Japanese matcha tea is exclusively of the Sagano variety.</p>
+							<div className="home-about-content__text">
+								<TitleComponent text={`Our goal is not ice cream. It would be quite simple. We need to make you "touched" when you, for example, bite into an Eskimo. It is difficult to do, but we do it.`} />
+							</div>
+							<div className="home-about-content__text">
+								<TitleComponent text={`How? We do not tolerate simplifications: neither in tastes, nor in ingredients, nor in production. Pistachio, for example, we buy on a farm in the Bronte region, Sicily. We order Alfonso mango from India, and chocolate is brought to us directly from Belgium. Our Japanese matcha tea is exclusively of the Sagano variety.`} />
+							</div>
 						</div>
 						<CircleLink href={'/'} text={'About us'} nameClass={'home-about-content__link'} />
 					</div>

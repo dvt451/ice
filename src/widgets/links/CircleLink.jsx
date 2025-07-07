@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaArrowRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import TitleComponent from '../../features/TitleAnimation/TitleComponent'
 
 export default function CircleLink({ href, text, nameClass }) {
 	return (
@@ -16,7 +17,7 @@ export default function CircleLink({ href, text, nameClass }) {
 				</i>
 			</i>
 			<div className="main-link__text">
-				{text}
+				<TitleComponent text={text} />
 			</div>
 		</Link>
 	)
